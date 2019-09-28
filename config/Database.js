@@ -7,7 +7,8 @@ const connectDB = (callBack) => {
     mongoose.connect(db, {
         useNewUrlParser: true,
         useCreateIndex: true,
-        useFindAndModify: false
+        useFindAndModify: false,
+        useUnifiedTopology: true
     })
     .then(() => connectionEstablished(callBack))
     .catch((err) => handleDbConnectionError(err));
