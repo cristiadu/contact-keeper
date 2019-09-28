@@ -4,9 +4,12 @@ const connectDB = require('./config/Database');
 
 const startServer = () => {
     const app = express();
-    app.get('/', (req,res) => res.json({ msg: "Welcome to the Contact Keeper API..." }));
-    
+
+    // Configure JSON body parser
+    app.use(express.json({ extended: false }));
+  
     // Routes
+    app.get('/', (req,res) => res.json({ msg: "Welcome to the Contact Keeper API..." }));
     app.use('/api/users', require('./routes/UserRoutes'));
     app.use('/api/auth', require('./routes/AuthRoutes'));
     app.use('/api/contacts', require('./routes/ContactRoutes'));
