@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 
-const User = require('../models/User');
+const errorHandler = require('../config/ErrorHandler');
+
+const userService = require('../services/UserService');
 
 /*
  * @route        POST  /api/users
@@ -17,14 +19,19 @@ router.post('/', [
         .isEmail(),
     check('password', 'Please enter a password with a length between 6 and 32')
         .isLength({ min: 6, max: 32 })
-], (req, res) => {
+], async (req, res) => {
     const validationErrors = validationResult(req);
-
     if(!validationErrors.isEmpty()) {
         return res.status(400).json({ errors: validationErrors.array() });
     }
 
-    return res.send("ok!");
+    try {
+        const { name, email, password } = req.body;
+        const createdUser = await userService.createUser(name, email, password);
+        return res.status(200).json(createdUser);
+    } catch(error) {
+        errorHandler.responseFromApiError(res, error, "userService", "createUser");
+    }
 });
 
 module.exports = router;
