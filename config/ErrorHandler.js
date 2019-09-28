@@ -1,5 +1,5 @@
 module.exports.responseFromApiError = (res, error, fileName, method) => {
-    if (error.errorCode && error.errorMessage) {
+    if (error.errorCode && error.message) {
         return res.status(error.errorCode).json({ error: error.message });
     }
 
