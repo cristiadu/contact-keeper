@@ -3,26 +3,24 @@ const mongoose = require('mongoose');
 
 const db = config.get('mongoURI');
 
-const connectDB = (callBack) => {
-    mongoose.connect(db, {
+const connectDB = async () => {
+    return mongoose.connect(db, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: false,
         useUnifiedTopology: true
     })
-    .then(() => connectionEstablished(callBack))
+    .then(() => connectionEstablished())
     .catch((err) => handleDbConnectionError(err));
 };
 
-const connectionEstablished = (callBack) => {
+const connectionEstablished = () => {
     console.log("Connection with MongoDB established.");
 
     // Setting up listener for further connection errors.
     mongoose.connection.on('error', err => {
         handleDbConnectionError(err);
       });
-
-    callBack();
 };
 
 const handleDbConnectionError = (error) => {

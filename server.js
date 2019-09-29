@@ -19,4 +19,5 @@ const startServer = () => {
 };
 
 // Connect DB and then start the server.
-connectDB(startServer);
+connectDB()
+    .then(startServer);
