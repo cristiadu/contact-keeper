@@ -20,4 +20,4 @@ const generateSaltedPassword = async (password) => {
     return await bcrypt.hash(password, salt);
 };
 
-module.exports = {createUser};
+module.exports = { createUser, getUser };

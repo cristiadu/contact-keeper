@@ -1,3 +1,7 @@
+const { validationResult } = require('express-validator');
+
+const VALIDATION_ERROR = { errorCode: 400, message: "Error while validating request"};
+
 const responseFromApiError = (res, error, fileName, method) => {
     if (error.errorCode && error.message) {
         return res.status(error.errorCode).json({ error: error.message });
@@ -7,4 +11,10 @@ const responseFromApiError = (res, error, fileName, method) => {
     return res.status(500).json({ error: "Server Error" });
 };
 
-module.exports = { responseFromApiError };
+const validateRequest = (req) => {
+    const validationErrors = validationResult(req);
+    const validationErrorHttpResponse = { errors: validationErrors, ...VALIDATION_ERROR };
+    if(!validationErrors.isEmpty()) throw validationErrorHttpResponse;
+};
+
+module.exports = { responseFromApiError, validateRequest };
