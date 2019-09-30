@@ -4,16 +4,22 @@ const { check } = require('express-validator');
 
 const errorHandler = require('../config/ErrorHandler');
 
-const authService = require('../services/AuthService');
-
+const userService = require('../services/UserService');
+const { checkJwtAuth, ...authService } = require('../services/AuthService');
 
 /*
  * @route        GET  /api/auth
  * @description  Gets logged in user.
  * @access       Authenticated Users
 */
-router.get('/', (req, res) => {
-    res.send('Get logged in user');
+router.get('/', checkJwtAuth, async (req, res) => {
+    try {
+        const user = await userService.getUserById(req.user.id);
+        return res.status(200).json(user);
+    } catch (error) {
+        errorHandler.responseFromApiError(res, error, "userService", "getUserById");
+    }
+
 });
 
 /*

@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+const { checkJwtAuth } = require('../services/AuthService');
+
 /*
  * @route        GET  /api/contacts
  * @description  Gets all user's contacts.
  * @access       Authemticated User
 */
-router.get('/', (req, res) => {
+router.get('/', checkJwtAuth, (req, res) => {
     res.send('Get all contacts from user.');
 });
 
@@ -15,7 +17,7 @@ router.get('/', (req, res) => {
  * @description  Add a new contact for the authenticated user.
  * @access       Authemticated User
 */
-router.post('/', (req, res) => {
+router.post('/', checkJwtAuth, (req, res) => {
     res.send('Add contact for user');
 });
 
@@ -24,7 +26,7 @@ router.post('/', (req, res) => {
  * @description  Update a contact of the authenticated user.
  * @access       Authemticated User
 */
-router.put('/:id', (req, res) => {
+router.put('/:id', checkJwtAuth, (req, res) => {
     res.send('Add contact for user');
 });
 
@@ -33,7 +35,7 @@ router.put('/:id', (req, res) => {
  * @description  Delete a contact of the authenticated user.
  * @access       Authemticated User
 */
-router.delete('/:id', (req, res) => {
+router.delete('/:id', checkJwtAuth, (req, res) => {
     res.send('Add contact for user');
 });
 
