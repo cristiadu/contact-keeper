@@ -4,7 +4,7 @@ const VALIDATION_ERROR = { errorCode: 400, message: "Error while validating requ
 
 const responseFromApiError = (res, error, fileName, method) => {
     if (error.errorCode && error.message) {
-        return res.status(error.errorCode).json({ error: error.message });
+        return res.status(error.errorCode).json(error);
     }
 
     console.error(`Received Error: "${error}" while calling ${method} from ${fileName}`);
@@ -13,7 +13,7 @@ const responseFromApiError = (res, error, fileName, method) => {
 
 const validateRequest = (req) => {
     const validationErrors = validationResult(req);
-    const validationErrorHttpResponse = { errors: validationErrors, ...VALIDATION_ERROR };
+    const validationErrorHttpResponse = { errors: validationErrors.array(), ...VALIDATION_ERROR };
     if(!validationErrors.isEmpty()) throw validationErrorHttpResponse;
 };
 
