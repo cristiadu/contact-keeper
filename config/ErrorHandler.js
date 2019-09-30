@@ -13,8 +13,7 @@ const responseFromApiError = (res, error, fileName, method) => {
 
 const validateRequest = (req) => {
     const validationErrors = validationResult(req);
-    const validationErrorHttpResponse = { errors: validationErrors.array(), ...VALIDATION_ERROR };
-    if(!validationErrors.isEmpty()) throw validationErrorHttpResponse;
+    if(!validationErrors.isEmpty()) throw { errors: validationErrors.array(), ...VALIDATION_ERROR };
 };
 
 module.exports = { responseFromApiError, validateRequest };
