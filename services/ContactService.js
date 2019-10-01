@@ -10,7 +10,6 @@ const getUserContacts = async (userId, sortOptions = {date: -1 }) => await Conta
     .find({ user: userId })
     .sort(sortOptions);
 
-
 /*
  * Create a new contact for a particular user.
 */
