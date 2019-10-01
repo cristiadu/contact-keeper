@@ -12,7 +12,7 @@ const DELETED_CONTACT_RESPONSE = { code: 200, message: "Contact is now removed."
 /*
  * @route        GET  /api/contacts
  * @description  Gets all user's contacts.
- * @access       Authemticated User
+ * @access       Authenticated User
 */
 router.get('/', checkJwtAuth, async (req, res) => {
     try {
@@ -26,7 +26,7 @@ router.get('/', checkJwtAuth, async (req, res) => {
 /*
  * @route        POST  /api/contacts
  * @description  Add a new contact for the authenticated user.
- * @access       Authemticated User
+ * @access       Authenticated User
 */
 router.post('/', [checkJwtAuth, [
     check('name', 'Name is required').not().isEmpty(),
@@ -46,7 +46,7 @@ router.post('/', [checkJwtAuth, [
 /*
  * @route        PUT  /api/contacts/:id
  * @description  Update a contact of the authenticated user.
- * @access       Authemticated User
+ * @access       Authenticated User
 */
 router.put('/:id', [checkJwtAuth, [
     check('email', 'Email should be valid').optional().isEmail()
@@ -65,7 +65,7 @@ router.put('/:id', [checkJwtAuth, [
 /*
  * @route        DELETE  /api/contacts/:id
  * @description  Delete a contact of the authenticated user.
- * @access       Authemticated User
+ * @access       Authenticated User
 */
 router.delete('/:id', checkJwtAuth, async (req, res) => {
     try {
