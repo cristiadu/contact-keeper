@@ -20,8 +20,8 @@ router.post('/', [
         errorHandler.validateRequest(req);
         const { name, email, password } = req.body;
        
-        const { _doc: { _id, hashedPassword, __v, ...createdUserSafeAttributes  } } = await userService.createUser(name, email, password);       
-        return res.status(200).json(createdUserSafeAttributes);
+        const createUser = await userService.createUser(name, email, password);       
+        return res.status(200).json(createUser);
     } catch (error) {
         errorHandler.responseFromApiError(res, error, "userService", "createUser");
     }
