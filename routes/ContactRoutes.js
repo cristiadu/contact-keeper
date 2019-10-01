@@ -1,15 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const { check } = require('express-validator');
+
+const errorHandler = require('../config/ErrorHandler');
 
 const { checkJwtAuth } = require('../services/AuthService');
+const contactService = require('../services/ContactService');
 
 /*
  * @route        GET  /api/contacts
  * @description  Gets all user's contacts.
  * @access       Authemticated User
 */
-router.get('/', checkJwtAuth, (req, res) => {
-    res.send('Get all contacts from user.');
+router.get('/', checkJwtAuth, async (req, res) => {
+    try {
+        const contacts = await contactService.getUserContacts(req.user.id);
+        res.status(200).json(contacts);
+    } catch (error) {
+        errorHandler.responseFromApiError(res, error, 'contactService', '/ GET');
+    }
 });
 
 /*

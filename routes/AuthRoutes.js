@@ -19,7 +19,6 @@ router.get('/', checkJwtAuth, async (req, res) => {
     } catch (error) {
         errorHandler.responseFromApiError(res, error, "userService", "getUserById");
     }
-
 });
 
 /*

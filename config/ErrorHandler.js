@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 
 const VALIDATION_ERROR = { errorCode: 400, message: "Error while validating request"};
+const INTERNAL_ERROR = { errorCode: 500, message: "Internal Server Error" };
 
 const responseFromApiError = (res, error, fileName, method) => {
     if (error.errorCode && error.message) {
@@ -8,7 +9,7 @@ const responseFromApiError = (res, error, fileName, method) => {
     }
 
     console.error(`Received Error: "${error}" while calling ${method} from ${fileName}`);
-    return res.status(500).json({ error: "Server Error" });
+    return res.status(INTERNAL_ERROR.errorCode).json(INTERNAL_ERROR);
 };
 
 const validateRequest = (req) => {

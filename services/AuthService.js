@@ -11,6 +11,13 @@ const MISSING_TOKEN_ERROR = { errorCode: 401, message: "Authentication token mis
 const INVALID_TOKEN_ERROR = { errorCode: 401, message: "Invalid authentication token" };
 const INVALID_CREDENTIALS_ERROR = { errorCode: 400, message: "Invalid credentials" };
 
+
+/*
+ * Method that verifies that a particular email is from 
+ *   a validUser and that the password matches.
+ *
+ *  It also returns the user retrieved by the email provided.
+*/
 const verifyCredentialsAndReturnUser = async (email, password) => {
     let user = await userService.getUserByEmail(email);
     if (!user) throw INVALID_CREDENTIALS_ERROR;
@@ -21,6 +28,11 @@ const verifyCredentialsAndReturnUser = async (email, password) => {
     return user;
 };
 
+
+/*
+ * Creates a jwtToken with the userId and signed by our jwtSecret.
+ *  It then returns the jwt created.
+*/
 const generateJwtToken = (user) => {
     const payload = {
         user: {
@@ -31,6 +43,15 @@ const generateJwtToken = (user) => {
     return jwt.sign(payload, jwtSecret, { expiresIn: 360000 });
 };
 
+
+/*
+ * Handler method used as an authentication filter.
+ *  It is applied to all routes that need authentication,
+ *  and it checks for the jwtToken signed by our jwtSecret.
+ *
+ *  It also adds to the request the user information
+ *   extracted from the jwtToken provided.
+*/
 const checkJwtAuth = (req, res, next) => {
     try {
         const token = req.header('x-auth-token');
@@ -45,6 +66,14 @@ const checkJwtAuth = (req, res, next) => {
     }
 };
 
+
+/*
+ * Verifies that a particular token is a valid jwtToken
+ *  and that it's signed by our jwtSecret.
+ * 
+ * If it's not valid, throws an exception 
+ *  for the errorHandler to treat as a HTTP response later.
+*/
 const verifyJwt = (token) => {
     try {
         return jwt.verify(token, jwtSecret);
