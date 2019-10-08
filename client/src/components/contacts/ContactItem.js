@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+
+import ContactContext from '../../context/contacts/ContactContext';
 
 import './ContactItem.css'
 
 const ContactItem = ({ contact }) => {
-    const { name, email, phone, type } = contact;
+    const contactContext = useContext(ContactContext);
+
+    const { id, name, email, phone, type } = contact;
     const badgeClass = type === 'professional' ? 'badge-success' : 'badge-primary';
+
+    const onDeleteClick = () => {
+        contactContext.deleteContact(id);
+    };
 
     return (
         <div className="card bg-light">
@@ -24,7 +32,7 @@ const ContactItem = ({ contact }) => {
             </ul>
             <div>
                 <button className="btn btn-dark btn-sm">Edit</button>
-                <button className="btn btn-danger btn-sm">Delete</button>
+                <button className="btn btn-danger btn-sm" onClick={onDeleteClick}>Delete</button>
             </div>
         </div>
     );
