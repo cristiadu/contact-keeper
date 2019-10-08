@@ -13,12 +13,13 @@ const ContactItem = ({ contact }) => {
 
     const onDeleteClick = () => {
         contactContext.deleteContact(id);
+        contactContext.clearCurrent();
     };
 
     return (
         <div className="card bg-light">
             <h3 className="text-primary text-left">
-                {name}{' '}
+                {name}
                 <span className={`badge right ${badgeClass}`}>{type.toUpperCase()}</span>
             </h3>
             <ul className="list">
@@ -31,7 +32,7 @@ const ContactItem = ({ contact }) => {
                 )}
             </ul>
             <div>
-                <button className="btn btn-dark btn-sm">Edit</button>
+                <button className="btn btn-dark btn-sm" onClick={() => contactContext.setCurrent(contact)}>Edit</button>
                 <button className="btn btn-danger btn-sm" onClick={onDeleteClick}>Delete</button>
             </div>
         </div>
