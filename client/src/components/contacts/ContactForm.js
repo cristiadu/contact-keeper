@@ -43,47 +43,47 @@ const ContactForm = () => {
   }
 
   return (
-        <form onSubmit={onSubmit} >
-            <h2 className="text-primary">
-                {currentAction}
-            </h2>
-            <input type="text"
-                placeholder="Name"
-                name="name"
-                value={name}
-                onChange={onChange}
-            />
-            <input type="email"
-                placeholder="Email"
-                name="email"
-                value={email}
-                onChange={onChange}
-            />
-            <input type="text"
-                placeholder="Phone Number"
-                name="phone"
-                value={phone}
-                onChange={onChange}
-            />
-            <h5>Contact Type</h5>
-            <input type="radio"
-                name="type"
-                value="personal"
-                onChange={onChange}
-                checked={ type === 'personal' } /> Personal&nbsp;
+    <form onSubmit={onSubmit} >
+      <h2 className="text-primary">
+        {currentAction}
+      </h2>
+      <input type="text"
+        placeholder="Name"
+        name="name"
+        value={name}
+        onChange={onChange}
+      />
+      <input type="email"
+        placeholder="Email"
+        name="email"
+        value={email}
+        onChange={onChange}
+      />
+      <input type="text"
+        placeholder="Phone Number"
+        name="phone"
+        value={phone}
+        onChange={onChange}
+      />
+      <h5>Contact Type</h5>
+      <input type="radio"
+        name="type"
+        value="personal"
+        onChange={onChange}
+        checked={type === 'personal'} /> Personal&nbsp;
 
-            <input type="radio"
-                name="type"
-                value="professional"
-                onChange={onChange}
-                checked={ type === 'professional' } /> Professional
-            <div>
-                <input type="submit" value={currentAction} className="btn btn-primary btn-block" />
-            </div>
-            {current && <div>
-                <button className="btn btn-light btn-block" onClick={clearForm}>Clear</button>
-            </div>}
-        </form>
+      <input type="radio"
+        name="type"
+        value="professional"
+        onChange={onChange}
+        checked={type === 'professional'} /> Professional
+      <div>
+        <input type="submit" value={currentAction} className="btn btn-primary btn-block" />
+      </div>
+      {current && <div>
+        <button className="btn btn-light btn-block" onClick={clearForm}>Clear</button>
+      </div>}
+    </form>
   )
 }
 

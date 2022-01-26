@@ -12,7 +12,7 @@
     "client-install": "npm install --prefix client",
     "check-client-code": "./client/node_modules/.bin/eslint \"./client/**\" --ignore-path ./client/.eslintignore",
     "format-client-code": "./client/node_modules/.bin/eslint \"./client/**\" --fix --ignore-path ./client/.eslintignore",
-    "dev":"concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

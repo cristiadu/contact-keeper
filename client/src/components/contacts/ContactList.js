@@ -10,11 +10,11 @@ const ContactList = () => {
   const { contacts } = contactContext
 
   return (
-        <>
-        {contacts.map((contact) => (
-            <ContactItem key={contact.id} contact={contact} />
-        ))}
-        </>
+    <>
+      {contacts.map((contact) => (
+        <ContactItem key={contact.id} contact={contact} />
+      ))}
+    </>
   )
 }
 
