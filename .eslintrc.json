@@ -1,0 +1,42 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended"
+  ],
+  "globals": {
+    "$": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        "css": "always",
+        "svg": "always"
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 140,
+        "tabWidth": 2
+      }
+    ],
+    "no-console": "off",
+    "semi": [
+      "error",
+      "never"
+    ]
+  }
+}

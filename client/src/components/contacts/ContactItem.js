@@ -1,22 +1,24 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 
-import ContactContext from '../../context/contacts/ContactContext';
+import ContactContext from '../../context/contacts/ContactContext'
 
 import './ContactItem.css'
 
 const ContactItem = ({ contact }) => {
-    const contactContext = useContext(ContactContext);
+  const contactContext = useContext(ContactContext)
 
-    const { id, name, email, phone, type } = contact;
-    const badgeClass = type === 'professional' ? 'badge-success' : 'badge-primary';
+  const {
+    id, name, email, phone, type,
+  } = contact
+  const badgeClass = type === 'professional' ? 'badge-success' : 'badge-primary'
 
-    const onDeleteClick = () => {
-        contactContext.deleteContact(id);
-        contactContext.clearCurrent();
-    };
+  const onDeleteClick = () => {
+    contactContext.deleteContact(id)
+    contactContext.clearCurrent()
+  }
 
-    return (
+  return (
         <div className="card bg-light">
             <h3 className="text-primary text-left">
                 {name}
@@ -36,11 +38,11 @@ const ContactItem = ({ contact }) => {
                 <button className="btn btn-danger btn-sm" onClick={onDeleteClick}>Delete</button>
             </div>
         </div>
-    );
-};
-
-ContactItem.propTypes = {
-    contact: PropTypes.object.isRequired
+  )
 }
 
-export default ContactItem;
+ContactItem.propTypes = {
+  contact: PropTypes.object.isRequired,
+}
+
+export default ContactItem

@@ -1,13 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const { check } = require('express-validator');
+const express = require('express')
 
-const errorHandler = require('../config/ErrorHandler');
+const router = express.Router()
+const { check } = require('express-validator')
 
-const { checkJwtAuth } = require('../services/AuthService');
-const contactService = require('../services/ContactService');
+const errorHandler = require('../config/ErrorHandler')
 
-const DELETED_CONTACT_RESPONSE = { code: 200, message: "Contact is now removed." };
+const { checkJwtAuth } = require('../services/AuthService')
+const contactService = require('../services/ContactService')
+
+const DELETED_CONTACT_RESPONSE = { code: 200, message: 'Contact is now removed.' }
 
 /*
  * @route        GET  /api/contacts
@@ -15,13 +16,13 @@ const DELETED_CONTACT_RESPONSE = { code: 200, message: "Contact is now removed."
  * @access       Authenticated User
 */
 router.get('/', checkJwtAuth, async (req, res) => {
-    try {
-        const contacts = await contactService.getUserContacts(req.user.id);
-        return res.status(200).json(contacts);
-    } catch (error) {
-        errorHandler.responseFromApiError(res, error, 'contactService', 'getUserContacts');
-    }
-});
+  try {
+    const contacts = await contactService.getUserContacts(req.user.id)
+    return res.status(200).json(contacts)
+  } catch (error) {
+    return errorHandler.responseFromApiError(res, error, 'contactService', 'getUserContacts')
+  }
+})
 
 /*
  * @route        POST  /api/contacts
@@ -29,19 +30,21 @@ router.get('/', checkJwtAuth, async (req, res) => {
  * @access       Authenticated User
 */
 router.post('/', [checkJwtAuth, [
-    check('name', 'Name is required').not().isEmpty(),
-    check('email', 'Email should be valid').optional().isEmail()
+  check('name', 'Name is required').not().isEmpty(),
+  check('email', 'Email should be valid').optional().isEmail(),
 ]], async (req, res) => {
-    try {
-        errorHandler.validateRequest(req);
+  try {
+    errorHandler.validateRequest(req)
 
-        const { name, email, phone, type } = req.body;
-        const newContact = await contactService.createContact(req.user.id, name, email, phone, type);
-        return res.status(200).json(newContact);
-    } catch (error) {
-        errorHandler.responseFromApiError(res, error, 'contactService', 'createContact');
-    }
-});
+    const {
+      name, email, phone, type,
+    } = req.body
+    const newContact = await contactService.createContact(req.user.id, name, email, phone, type)
+    return res.status(200).json(newContact)
+  } catch (error) {
+    return errorHandler.responseFromApiError(res, error, 'contactService', 'createContact')
+  }
+})
 
 /*
  * @route        PUT  /api/contacts/:id
@@ -49,18 +52,20 @@ router.post('/', [checkJwtAuth, [
  * @access       Authenticated User
 */
 router.put('/:id', [checkJwtAuth, [
-    check('email', 'Email should be valid').optional().isEmail()
+  check('email', 'Email should be valid').optional().isEmail(),
 ]], async (req, res) => {
-    try {
-        errorHandler.validateRequest(req);
+  try {
+    errorHandler.validateRequest(req)
 
-        const { name, email, phone, type } = req.body;
-        const updatedContact = await contactService.updateContact(req.user.id, req.params.id, name, email, phone, type);
-        return res.status(200).json(updatedContact);
-    } catch (error) {
-        errorHandler.responseFromApiError(res, error, 'contactService', 'updateContact'); 
-    }
-});
+    const {
+      name, email, phone, type,
+    } = req.body
+    const updatedContact = await contactService.updateContact(req.user.id, req.params.id, name, email, phone, type)
+    return res.status(200).json(updatedContact)
+  } catch (error) {
+    return errorHandler.responseFromApiError(res, error, 'contactService', 'updateContact')
+  }
+})
 
 /*
  * @route        DELETE  /api/contacts/:id
@@ -68,12 +73,12 @@ router.put('/:id', [checkJwtAuth, [
  * @access       Authenticated User
 */
 router.delete('/:id', checkJwtAuth, async (req, res) => {
-    try {
-        await contactService.deleteContact(req.user.id, req.params.id);
-        return res.status(DELETED_CONTACT_RESPONSE.code).json(DELETED_CONTACT_RESPONSE);
-    } catch (error) {
-        errorHandler.responseFromApiError(res, error, 'contactService', 'deleteContact');
-    }
-});
+  try {
+    await contactService.deleteContact(req.user.id, req.params.id)
+    return res.status(DELETED_CONTACT_RESPONSE.code).json(DELETED_CONTACT_RESPONSE)
+  } catch (error) {
+    return errorHandler.responseFromApiError(res, error, 'contactService', 'deleteContact')
+  }
+})
 
-module.exports = router;
+module.exports = router

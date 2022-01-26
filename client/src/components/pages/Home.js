@@ -1,11 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import ContactList from '../contacts/ContactList';
-import ContactForm from '../contacts/ContactForm';
+import ContactList from '../contacts/ContactList'
+import ContactForm from '../contacts/ContactForm'
 
-
-const Home = () => {
-    return (
+const Home = () => (
         <div className="grid-2">
             <div>
                 <ContactForm />
@@ -14,7 +12,6 @@ const Home = () => {
                 <ContactList />
             </div>
         </div>
-    );
-};
+)
 
-export default Home;
+export default Home
