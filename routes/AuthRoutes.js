@@ -1,11 +1,12 @@
-const express = require('express');
-const router = express.Router();
-const { check } = require('express-validator');
+const express = require('express')
 
-const errorHandler = require('../config/ErrorHandler');
+const router = express.Router()
+const { check } = require('express-validator')
 
-const userService = require('../services/UserService');
-const { checkJwtAuth, ...authService } = require('../services/AuthService');
+const errorHandler = require('../config/ErrorHandler')
+
+const userService = require('../services/UserService')
+const { checkJwtAuth, ...authService } = require('../services/AuthService')
 
 /*
  * @route        GET  /api/auth
@@ -13,13 +14,13 @@ const { checkJwtAuth, ...authService } = require('../services/AuthService');
  * @access       Authenticated Users
 */
 router.get('/', checkJwtAuth, async (req, res) => {
-    try {
-        const user = await userService.getUserById(req.user.id);
-        return res.status(200).json(user);
-    } catch (error) {
-        errorHandler.responseFromApiError(res, error, "userService", "getUserById");
-    }
-});
+  try {
+    const user = await userService.getUserById(req.user.id)
+    return res.status(200).json(user)
+  } catch (error) {
+    return errorHandler.responseFromApiError(res, error, 'userService', 'getUserById')
+  }
+})
 
 /*
  * @route        POST  /api/auth
@@ -27,20 +28,20 @@ router.get('/', checkJwtAuth, async (req, res) => {
  * @access       Public
 */
 router.post('/', [
-    check('email', 'Please enter a valid email').isEmail(),
-    check('password', 'Password is required').exists()
+  check('email', 'Please enter a valid email').isEmail(),
+  check('password', 'Password is required').exists(),
 ], async (req, res) => {
-    try {
-        errorHandler.validateRequest(req);
+  try {
+    errorHandler.validateRequest(req)
 
-        const { email, password } = req.body;
+    const { email, password } = req.body
 
-        const user = await authService.verifyCredentialsAndReturnUser(email, password);
-        const jwtToken = authService.generateJwtToken(user);
-        return res.status(200).json({ token: jwtToken });
-    } catch (error) {
-        errorHandler.responseFromApiError(res, error, "authService", "/api/auth POST");
-    }
-});
+    const user = await authService.verifyCredentialsAndReturnUser(email, password)
+    const jwtToken = authService.generateJwtToken(user)
+    return res.status(200).json({ token: jwtToken })
+  } catch (error) {
+    return errorHandler.responseFromApiError(res, error, 'authService', '/api/auth POST')
+  }
+})
 
-module.exports = router;
+module.exports = router

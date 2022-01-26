@@ -6,8 +6,12 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
+    "check-server-code": "./node_modules/.bin/eslint \"./**\" --ignore-path ./.eslintignore",
+    "format-server-code": "./node_modules/.bin/eslint \"./**\" --fix --ignore-path ./.eslintignore",
     "client": "npm start --prefix client",
     "client-install": "npm install --prefix client",
+    "check-client-code": "./client/node_modules/.bin/eslint \"./client/**\" --ignore-path ./client/.eslintignore",
+    "format-client-code": "./client/node_modules/.bin/eslint \"./client/**\" --fix --ignore-path ./client/.eslintignore",
     "dev":"concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +25,9 @@
     "url": "https://github.com/cristiadu/contact-keeper/issues"
   },
   "homepage": "https://github.com/cristiadu/contact-keeper#readme",
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.7",
@@ -31,6 +38,9 @@
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
   }
 }

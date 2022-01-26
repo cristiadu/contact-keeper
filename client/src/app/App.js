@@ -1,29 +1,27 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-import './App.css';
+import './App.css'
 
-import Navbar from '../components/layout/Navbar';
+import Navbar from '../components/layout/Navbar'
 
-import Home from '../components/pages/Home';
-import About from '../components/pages/About';
+import Home from '../components/pages/Home'
+import About from '../components/pages/About'
 
-import ContactState from '../context/contacts/ContactState';
+import ContactState from '../context/contacts/ContactState'
 
-const App = () => {
-  return (
+const App = () => (
     <ContactState>
       <Router>
         <Navbar />
         <div className="container">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
         </div>
       </Router>
     </ContactState>
-  );
-}
+)
 
-export default App;
+export default App

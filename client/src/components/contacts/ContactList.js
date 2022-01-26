@@ -1,21 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext } from 'react'
 
-import ContactContext from '../../context/contacts/ContactContext';
+import ContactContext from '../../context/contacts/ContactContext'
 
-import ContactItem from './ContactItem';
+import ContactItem from './ContactItem'
 
 const ContactList = () => {
-    const contactContext = useContext(ContactContext);
+  const contactContext = useContext(ContactContext)
 
-    const { contacts } = contactContext;
+  const { contacts } = contactContext
 
-    return (
+  return (
         <>
-        {contacts.map(contact => (
+        {contacts.map((contact) => (
             <ContactItem key={contact.id} contact={contact} />
         ))}
         </>
-    );
-};
+  )
+}
 
-export default ContactList;
+export default ContactList

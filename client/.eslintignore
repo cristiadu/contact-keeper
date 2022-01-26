@@ -1,0 +1,6 @@
+build/
+*.css
+*.html
+*.json
+*.png
+*.ico
