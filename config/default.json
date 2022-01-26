@@ -1,4 +1,4 @@
 {
-    "jwtSecret":"secret",
-    "mongoURI": "mongodb+srv://cristiadu:futebol007@contactkeeper-ykcfb.mongodb.net/test?retryWrites=true&w=majority"
+  "jwtSecret": "secret",
+  "mongoURI": "mongodb+srv://cristiadu:futebol007@contactkeeper-ykcfb.mongodb.net/test?retryWrites=true&w=majority"
 }

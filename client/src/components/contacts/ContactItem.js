@@ -19,25 +19,25 @@ const ContactItem = ({ contact }) => {
   }
 
   return (
-        <div className="card bg-light">
-            <h3 className="text-primary text-left">
-                {name}
-                <span className={`badge right ${badgeClass}`}>{type.toUpperCase()}</span>
-            </h3>
-            <ul className="list">
-                {email && (
-                    <li><i className="fas fa-envelope-open"/> {email}</li>
-                )}
+    <div className="card bg-light">
+      <h3 className="text-primary text-left">
+        {name}
+        <span className={`badge right ${badgeClass}`}>{type.toUpperCase()}</span>
+      </h3>
+      <ul className="list">
+        {email && (
+          <li><i className="fas fa-envelope-open" /> {email}</li>
+        )}
 
-                {phone && (
-                    <li><i className="fas fa-phone"/> {phone}</li>
-                )}
-            </ul>
-            <div>
-                <button className="btn btn-dark btn-sm" onClick={() => contactContext.setCurrent(contact)}>Edit</button>
-                <button className="btn btn-danger btn-sm" onClick={onDeleteClick}>Delete</button>
-            </div>
-        </div>
+        {phone && (
+          <li><i className="fas fa-phone" /> {phone}</li>
+        )}
+      </ul>
+      <div>
+        <button className="btn btn-dark btn-sm" onClick={() => contactContext.setCurrent(contact)}>Edit</button>
+        <button className="btn btn-danger btn-sm" onClick={onDeleteClick}>Delete</button>
+      </div>
+    </div>
   )
 }
 

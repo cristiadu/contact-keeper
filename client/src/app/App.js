@@ -11,17 +11,17 @@ import About from '../components/pages/About'
 import ContactState from '../context/contacts/ContactState'
 
 const App = () => (
-    <ContactState>
-      <Router>
-        <Navbar />
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </div>
-      </Router>
-    </ContactState>
+  <ContactState>
+    <Router>
+      <Navbar />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </div>
+    </Router>
+  </ContactState>
 )
 
 export default App
